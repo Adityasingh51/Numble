@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Numble Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Numble Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -18,24 +18,24 @@
     }
 
     body {
-      background: url('https://images.unsplash.com/photo-1487700160041-babef9c3cb55?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWluaW1hbGlzdCUyMHdhbGxwYXBlcnxlbnwwfHwwfHx8MA%3D%3D')no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1487700160041-babef9c3cb55?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWluaW1hbGlzdCUyMHdhbGxwYXBlcnxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center fixed;
       background-size: cover;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .login-container {
+    .signup-container {
       background: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
       text-align: center;
     }
 
-    .login-container h2 {
+    .signup-container h2 {
       margin-bottom: 20px;
       font-weight: 600;
     }
@@ -60,7 +60,7 @@
       outline: none;
     }
 
-    .login-btn {
+    .signup-btn {
       background-color: #4F46E5;
       color: white;
       border: none;
@@ -73,7 +73,7 @@
       transition: background 0.3s ease;
     }
 
-    .login-btn:hover {
+    .signup-btn:hover {
       background-color: #3730a3;
     }
 
@@ -118,7 +118,7 @@
     }
 
     @media (max-width: 500px) {
-      .login-container {
+      .signup-container {
         padding: 30px 20px;
       }
     }
@@ -126,22 +126,30 @@
 </head>
 <body>
 
-<div class="login-container">
-  <h2>NUMBLE</h2>
+<div class="signup-container">
+  <h2>Create your Numble account</h2>
   <form>
     <div class="input-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Enter your email">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+    </div>
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required />
     </div>
     <div class="input-group">
       <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter your password">
+      <input type="password" id="password" placeholder="Create a password" required />
     </div>
-    <button type="submit" class="login-btn">Login</button>
+    <div class="input-group">
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" placeholder="Confirm your password" required />
+    </div>
+    <button type="submit" class="signup-btn">Sign Up</button>
   </form>
 
   <div class="social-login">
-    <p>Or login with</p>
+    <p>Or sign up with</p>
     <button class="social-btn google-btn">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google icon">
       Google
@@ -150,10 +158,13 @@
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook icon">
       Facebook
     </button>
+    <button class="social-btn Guest-btn">
+    <a href="landing.html" style="color: #166406;">Continue as Guest</a>
+    </button>
   </div>
 
   <div class="footer">
-    Don't have an account? <a href="signup.html" style="color: #4F46E5;">Sign up</a>
+    Already have an account? <a href="login.html" style="color: #4F46E5;">Login</a>
   </div>
 </div>
 
