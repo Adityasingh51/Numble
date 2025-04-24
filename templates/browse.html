@@ -240,23 +240,27 @@
 
       <!-- Grid/List View -->
       <div class="dataset-grid">
-        <!-- Example File Card -->
-        <div class="file-card">
-          <img src="https://via.placeholder.com/300x140.png?text=Preview" alt="Preview" />
-          <div class="file-info">
-            <h4>image001.jpg</h4>
-            <p>Tags: cat, outdoor</p>
-            <div class="file-actions">
-              <button>Preview</button>
-              <button>Edit</button>
-              <button>Delete</button>
+        {% for dataset in datasetList %}
+          <div class="file-card">
+            <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
+            <div class="file-info">
+              <h4>{{ dataset.name }}</h4>
+              <p>Tags: {{ dataset.description }}</p>
+              <div class="file-actions">
+                <button>Preview</button>
+                <button>Edit</button>
+                <button>Delete</button>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- Add more file-card elements here -->
+        {% empty %}
+          <p>No datasets available.</p>
+        {% endfor %}
       </div>
     </main>
 
+
+    
     <!-- Right Sidebar (Optional) -->
     <aside class="right-sidebar">
       <h3>Details</h3>

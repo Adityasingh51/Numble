@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 from django.shortcuts import render , get_object_or_404
+=======
+from django.shortcuts import render, get_object_or_404
+>>>>>>> 60dd21c2f6e693e0cd8e4df3abaa91bb346f1051
 from .models import Datasetmanager
 
 # Create your views here.
 def browse(request):
+<<<<<<< HEAD
     datasetmanagerlist = datasetmanager.objects.all()
     print(datasetmanagerlist)
     context = {
@@ -18,3 +23,18 @@ def datasetDetails(request, datasetmanager_id):
     }
 
     return render(request,"datasetDetails.html",context=context)
+=======
+    datasetList = Datasetmanager.objects.all()
+    print('datasetList')  # Uncomment for debugging if needed
+    context = {
+        'datasetList': datasetList,
+    }
+    return render(request, "browse.html", context)
+
+def datasetDetails(request, dataset_id):
+    dataset = get_object_or_404(Datasetmanager, id=dataset_id)
+    context = {
+        "dataset": dataset,
+    }
+    return render(request, "datasetDetails.html", context=context)
+>>>>>>> 60dd21c2f6e693e0cd8e4df3abaa91bb346f1051
