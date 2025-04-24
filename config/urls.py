@@ -22,7 +22,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view( template_name='index.html'),name='home'),
+    path('', TemplateView.as_view( template_name='landing.html'),name='home'),
     # path('login/', TemplateView.as_view( template_name='login.html'),name='login'),
     # path('login/signup.html', TemplateView.as_view( template_name='signup.html'),name='login'),
     # path('signup/', TemplateView.as_view( template_name='signup.html'),name='signup'),
@@ -37,6 +37,7 @@ urlpatterns = [
     # path('login/browse.html', TemplateView.as_view( template_name='browse.html'),name='login'),
     # path("register/",TemplateView.as_view(template_name="register.html"),name="register"),
     path("", include("datasetmanager.urls"), name="datasetmanager"),
+    path("", include("authentication.urls"), name="auth"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
