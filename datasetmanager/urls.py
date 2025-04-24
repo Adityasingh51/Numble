@@ -5,7 +5,7 @@ from .views import browse, datasetDetails
 
 urlpatterns = [
     
-    path("browse/",browse,name="browse"),
-    path("view-datails/<int:product_id>", datasetDetails, name="datasetDetails")
+    path("browse/", browse, name="browse"),
+    path("view-details/<int:dataset_id>", datasetDetails, name="datasetDetails"),
    
 ]
