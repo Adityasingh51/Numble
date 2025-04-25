@@ -270,7 +270,7 @@
               <p>Tags: {{ dataset.description }}</p>
               <div class="file-actions">
                 <div class="buttons">
-                  <a href="datasetDetails.html" class="btn-preview">Preview</a>
+                  <a href="{% url 'datasetDetails' dataset.id %}" class="btn-preview">Preview</a>
                 </div>
               </div>
             </div>
