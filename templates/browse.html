@@ -30,12 +30,12 @@
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-    }
+          }
 
     .search-bar {
       flex: 1;
       max-width: 400px;
-      margin: 0 1rem;
+      margin: 0 5rem; /* Center the search bar */
       padding: 0.5rem;
       border-radius: 6px;
       border: none;
@@ -45,11 +45,12 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
+          }
 
     .upload-btn {
       background-color: #08419d;
       color: white;
+      margin-left: -5rem;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 6px;
@@ -220,7 +221,10 @@
   <!-- Top Navbar -->
   <header class="navbar">
     <div class="logo">Numble</div>
-    <input type="text" class="search-bar" placeholder="Search datasets..." />
+    <form method="get" action="{% url 'browse' %}" style="flex: 1; display: flex; gap: 0.5rem;">
+      <input type="text" name="q" class="search-bar" placeholder="Search datasets..." value="{{ request.GET.q|default:'' }}" />
+      <button type="submit" class="upload-btn">Search</button>
+    </form>
     <div class="nav-actions">
       <button class="upload-btn">Upload</button>
       <div class="profile-icon">👤</div>
@@ -264,7 +268,7 @@
       <div class="dataset-grid">
         {% for dataset in datasetList %}
           <div class="file-card">
-            <img src="{{dataset.file.url}}" alt="{{dataset.name}}" />
+            <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
             <div class="file-info">
               <h4>{{ dataset.name }}</h4>
               <p>Tags: {{ dataset.description }}</p>
@@ -276,7 +280,7 @@
             </div>
           </div>
         {% empty %}
-          <p>No datasets available.</p>
+          <p>No datasets found matching your search.</p>
         {% endfor %}
       </div>
     </main>
