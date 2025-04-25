@@ -36,6 +36,7 @@ urlpatterns = [
     path('login/browse.html', TemplateView.as_view( template_name='browse.html'),name='login'),
     path("register/",TemplateView.as_view(template_name="register.html"),name="register"),
     path('datasetDetails/', TemplateView.as_view( template_name='datasetDetails.html'),name='datasetDetails'),
+    path('browse/datasetDetails.html', TemplateView.as_view( template_name='datasetDetails.html'),name='datasetDetails'),
     path("", include("datasetmanager.urls"), name="datasetmanager"),
     path("", include("authentication.urls"), name="auth"),
     
