@@ -4,8 +4,6 @@ from django.views.generic import TemplateView
 from .views import browse, datasetDetails
 
 urlpatterns = [
-    
     path("browse/", browse, name="browse"),
     path("view-details/<int:dataset_id>", datasetDetails, name="datasetDetails"),
-   
 ]

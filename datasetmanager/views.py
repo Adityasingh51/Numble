@@ -9,6 +9,7 @@ def browse(request):
         'datasetList': datasetList,
     }
     return render(request, "browse.html", context)
+
 # For Search Functionality
 def browse(request):
     query = request.GET.get('q')  # Get the search query from the URL
