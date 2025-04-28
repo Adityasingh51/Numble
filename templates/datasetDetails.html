@@ -145,6 +145,123 @@
         flex-direction: column;
       }
     }
+
+    /* Review Section Styles */
+    .review-heading {
+      font-size: 2rem;
+      color: #1f2937;
+      margin-bottom: 30px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .review-form {
+      margin-bottom: 50px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #374151;
+      font-size: 1rem;
+    }
+
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .form-group textarea::placeholder {
+      color: #9ca3af;
+    }
+
+    .btn-primary {
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      background-color: #4f46e5;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      display: block;
+      margin: 0 auto;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #4338ca;
+      transform: translateY(-2px);
+    }
+
+    .reviews-container {
+      margin-top: 40px;
+    }
+
+    .review-card {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background-color: #f9fafb;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      margin: 0 auto;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .review-rating {
+      font-weight: bold;
+      color: #4f46e5;
+      font-size: 1.1rem;
+    }
+
+    .review-date {
+      font-size: 0.9rem;
+      color: #9ca3af;
+    }
+
+    .review-text {
+      color: #6b7280;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .no-reviews {
+      color: #6b7280;
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -152,7 +269,6 @@
   <!-- Header -->
   <header>
     <div class="logo">Numble</div>
-   
   </header>
 
   <!-- Main Content -->
@@ -182,45 +298,47 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Review Section -->
-  <div class="container" style="margin-top: 40px;">
-    <h3>Leave a Review</h3>
+    <!-- Review Section -->
+    <div class="container" style="margin-top: 60px;">
+      <h2 class="review-heading">Leave a Review</h2>
 
-    <!-- Form to Submit a Review -->
-    <form action="{% url 'submit_review' dataset.id %}" method="POST" style="margin-top: 20px;">
-      {% csrf_token %}
-      <div style="margin-bottom: 16px;">
-        <label for="rating" style="display: block; margin-bottom: 8px;">Rating (1-5):</label>
-        <select id="rating" name="rating" required style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; width: 100%;">
-          <option value="" disabled selected>Select a rating</option>
-          <option value="1">1 - Poor</option>
-          <option value="2">2 - Fair</option>
-          <option value="3">3 - Good</option>
-          <option value="4">4 - Very Good</option>
-          <option value="5">5 - Excellent</option>
-        </select>
-      </div>
-      <div style="margin-bottom: 16px;">
-        <label for="review" style="display: block; margin-bottom: 8px;">Review:</label>
-        <textarea id="review" name="review" rows="4" required style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit Review</button>
-    </form>
-
-    <!-- Display Existing Reviews -->
-    <div style="margin-top: 40px;">
-      <h3>Reviews</h3>
-      {% for review in dataset.reviews.all %}
-        <div style="margin-bottom: 20px; padding: 16px; border: 1px solid #e5e7eb; border-radius: 8px; background-color: #f9fafb;">
-          <div style="font-weight: bold; color: #4f46e5;">Rating: {{ review.rating }} / 5</div>
-          <p style="margin-top: 8px; color: #6b7280;">{{ review.text }}</p>
-          <div style="margin-top: 8px; font-size: 0.85rem; color: #9ca3af;">Reviewed on {{ review.created_at }}</div>
+      <!-- Form to Submit a Review -->
+      <form action="{% url 'submit_review' dataset.id %}" method="POST" class="review-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="rating">Rating (1-5):</label>
+          <select id="rating" name="rating" required>
+            <option value="" disabled selected>Select a rating</option>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Good</option>
+            <option value="4">4 - Very Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
         </div>
-      {% empty %}
-        <p style="color: #6b7280;">No reviews yet. Be the first to leave a review!</p>
-      {% endfor %}
+        <div class="form-group">
+          <label for="review">Your Review:</label>
+          <textarea id="review" name="review" rows="4" placeholder="Write your review here..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+
+      <!-- Display Existing Reviews -->
+      <div class="reviews-container">
+        <h2 class="review-heading">What Others Are Saying</h2>
+        {% for review in dataset.reviews.all %}
+          <div class="review-card">
+            <div class="review-header">
+              <span class="review-rating">Rating: {{ review.rating }} / 5</span>
+              <span class="review-date">{{ review.created_at }}</span>
+            </div>
+            <p class="review-text">{{ review.text }}</p>
+          </div>
+        {% empty %}
+          <p class="no-reviews">No reviews yet. Be the first to leave a review!</p>
+        {% endfor %}
+      </div>
     </div>
   </div>
 </body>
