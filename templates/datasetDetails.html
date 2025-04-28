@@ -154,9 +154,9 @@
     <div class="logo">Numble</div>
     <nav>
       <a href="/">Home</a>
-      <a href="/datasets">Datasets</a>
-      <a href="/upload">Upload</a>
-      <a href="/account">Account</a>
+      <a href="/browse">Datasets</a>
+      <a href="#">Upload</a>
+      <a href="/login">Account</a>
     </nav>
   </header>
 
@@ -165,24 +165,24 @@
     <div class="grid">
       <!-- Image Section -->
       <div class="image-box">
-        <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}">
+        <img src="{{dataset.file.url}}" alt="{{dataset.name}}">
       </div>
 
       <!-- Content Section -->
       <div class="content-box">
-        <h2>{{ dataset.name }}</h2>
+        <h2>{{dataset.name}}</h2>
 
         <h3>Description</h3>
-        <p>{{ dataset.description }}</p>
+        <p>{{dataset.description}}</p>
 
         <div class="meta">
-          <div><span>Category:</span> {{ dataset.category }}</div>
-          <div><span>Created At:</span> {{ dataset.created_at }}</div>
-          <div><span>Last Updated:</span> {{ dataset.updated_at }}</div>
+          <div><span>Category:</span> {{dataset.category}}</div>
+          <div><span>Created At:</span> {{dataset.created_at}}</div>
+          <div><span>Last Updated:</span> {{dataset.updated_at}}</div>
         </div>
 
         <div class="buttons">
-          <a href="{{ dataset.file.url }}" download class="btn btn-primary">Download</a>
+          <a href="{{dataset.file.url}}" download class="btn btn-primary">Download</a>
           <a href="#" class="btn btn-secondary">Share</a>
         </div>
       </div>

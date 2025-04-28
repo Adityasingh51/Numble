@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.contrib import admin 
 from django.urls import path,include
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
@@ -23,21 +23,23 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view( template_name='landing.html'),name='home'),
-    # path('login/', TemplateView.as_view( template_name='login.html'),name='login'),
-    # path('login/signup.html', TemplateView.as_view( template_name='signup.html'),name='login'),
-    # path('signup/', TemplateView.as_view( template_name='signup.html'),name='signup'),
-    # path('signup/login.html', TemplateView.as_view( template_name='login.html'),name='signup'),
-    # path('signup/login.html', TemplateView.as_view( template_name='signup.html'),name='login'),
-    # path('browse/', TemplateView.as_view( template_name='browse.html'),name='browse'),
-    # path('landing/', TemplateView.as_view( template_name='landing.html'),name='landing'),
-    # path('login/login.html', TemplateView.as_view( template_name='login.html'),name='signup'),
-    # path('landing/browse.html', TemplateView.as_view( template_name='browse.html'),name='landing'),
-    # path('login/landing.html', TemplateView.as_view( template_name='landing.html'),name='login'),
-    # path('signup/landing.html', TemplateView.as_view( template_name='landing.html'),name='signup'),
-    # path('login/browse.html', TemplateView.as_view( template_name='browse.html'),name='login'),
-    # path("register/",TemplateView.as_view(template_name="register.html"),name="register"),
+    path('login/', TemplateView.as_view( template_name='login.html'),name='login'),
+    path('login/register.html', TemplateView.as_view( template_name='register.html'),name='login'),
+    path('register/', TemplateView.as_view( template_name='register.html'),name='register'),
+    path('register/login.html', TemplateView.as_view( template_name='login.html'),name='register'),
+    path('register/login.html', TemplateView.as_view( template_name='register.html'),name='login'),
+    path('landing/', TemplateView.as_view( template_name='landing.html'),name='landing'),
+    path('login/login.html', TemplateView.as_view( template_name='login.html'),name='register'),
+    path('landing/browse.html', TemplateView.as_view( template_name='browse.html'),name='landing'),
+    path('login/landing.html', TemplateView.as_view( template_name='landing.html'),name='login'),
+    path('register/landing.html', TemplateView.as_view( template_name='landing.html'),name='register'),
+    path('login/browse.html', TemplateView.as_view( template_name='browse.html'),name='login'),
+    path("register/",TemplateView.as_view(template_name="register.html"),name="register"),
+    path('datasetDetails/', TemplateView.as_view( template_name='datasetDetails.html'),name='datasetDetails'),
+    path('browse/datasetDetails.html', TemplateView.as_view( template_name='datasetDetails.html'),name='datasetDetails'),
     path("", include("datasetmanager.urls"), name="datasetmanager"),
     path("", include("authentication.urls"), name="auth"),
+    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

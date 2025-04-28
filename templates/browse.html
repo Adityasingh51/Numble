@@ -13,7 +13,7 @@
     }
 
     body {
-      background-color: #f9f9fb;
+      background-color: #ffffff;
       color: #333;
     }
 
@@ -23,19 +23,19 @@
       justify-content: space-between;
       align-items: center;
       background-color: #111827;
-      color: white;
+      color: rgb(255, 255, 255);
       padding: 1rem 2rem;
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-    }
+          }
 
     .search-bar {
       flex: 1;
       max-width: 400px;
-      margin: 0 1rem;
+      margin: 0 5rem; /* Center the search bar */
       padding: 0.5rem;
       border-radius: 6px;
       border: none;
@@ -45,11 +45,12 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
+          }
 
     .upload-btn {
-      background-color: #3b82f6;
+      background-color: #08419d;
       color: white;
+      margin-left: -5rem;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 6px;
@@ -69,7 +70,7 @@
     /* Sidebar */
     .sidebar {
       width: 200px;
-      background-color: #f3f4f6;
+      background-color: #111827;
       padding: 1rem;
     }
 
@@ -83,12 +84,12 @@
 
     .sidebar a {
       text-decoration: none;
-      color: #111827;
+      color: #a3a3a3;
       font-weight: 500;
     }
 
     .sidebar a:hover {
-      text-decoration: underline;
+      color: #4d589cb3;
     }
 
     /* Main content */
@@ -114,7 +115,7 @@
     .filters button {
       margin-right: 0.5rem;
       padding: 0.4rem 0.8rem;
-      background-color: #e5e7eb;
+      background-color: #aeaeae6e;
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -127,12 +128,12 @@
     /* Dataset grid */
     .dataset-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Wider rectangles */
+      gap: 1rem; /* Reduced gap for a tighter layout */
     }
 
     .file-card {
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
       overflow: hidden;
@@ -145,7 +146,7 @@
 
     .file-card img {
       width: 100%;
-      height: 140px;
+      height: 200px; /* Adjusted height for a better aspect ratio */
       object-fit: cover;
     }
 
@@ -180,7 +181,7 @@
     /* Right Sidebar */
     .right-sidebar {
       width: 250px;
-      background-color: #f9fafb;
+      background-color: #c7c7c7;
       padding: 1rem;
       border-left: 1px solid #e5e7eb;
     }
@@ -192,13 +193,38 @@
       text-align: center;
       padding: 1rem;
     }
+
+    .btn-preview {
+      display: inline-block;
+      background-color: #3b82f6; /* Blue background */
+      color: white; /* White text */
+      padding: 0.5rem 1rem; /* Padding for size */
+      border-radius: 5px; /* Rounded corners */
+      text-decoration: none; /* Remove underline */
+      font-size: 0.9rem; /* Font size */
+      font-weight: 500; /* Slightly bold text */
+      transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+    }
+
+    .btn-preview:hover {
+      background-color: #2563eb; /* Darker blue on hover */
+      transform: translateY(-2px); /* Slight lift on hover */
+    }
+
+    .btn-preview:active {
+      background-color: #1d4ed8; /* Even darker blue when clicked */
+      transform: translateY(0); /* Reset lift on click */
+    }
   </style>
 </head>
 <body>
   <!-- Top Navbar -->
   <header class="navbar">
     <div class="logo">Numble</div>
-    <input type="text" class="search-bar" placeholder="Search datasets..." />
+    <form method="get" action="{% url 'browse' %}" style="flex: 1; display: flex; gap: 0.5rem;">
+      <input type="text" name="q" class="search-bar" placeholder="Search datasets..." value="{{ request.GET.q|default:'' }}" />
+      <button type="submit" class="upload-btn">Search</button>
+    </form>
     <div class="nav-actions">
       <button class="upload-btn">Upload</button>
       <div class="profile-icon">👤</div>
@@ -247,20 +273,20 @@
               <h4>{{ dataset.name }}</h4>
               <p>Tags: {{ dataset.description }}</p>
               <div class="file-actions">
-                <button>Preview</button>
-                <button>Edit</button>
-                <button>Delete</button>
+                <div class="buttons">
+                  <a href="{% url 'datasetDetails' dataset.id %}" class="btn-preview">Preview</a>
+                </div>
               </div>
             </div>
           </div>
         {% empty %}
-          <p>No datasets available.</p>
+          <p>No datasets found matching your search.</p>
         {% endfor %}
       </div>
     </main>
 
 
-    
+
     <!-- Right Sidebar (Optional) -->
     <aside class="right-sidebar">
       <h3>Details</h3>
