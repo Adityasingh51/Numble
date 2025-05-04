@@ -211,6 +211,58 @@
         gap: 1rem;
       }
     }
+
+    /* Gallery Section Styles */
+    #gallery {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    #gallery h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--highlight);
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .image-item {
+      background: var(--secondary);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 300px;
+      text-align: center;
+    }
+
+    .image-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .image-item p {
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    .image-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .image-item {
+        width: 90%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -257,6 +309,55 @@
       </div>
     </div>
   </section>
+
+  <!-- Image Gallery Section -->
+<section id="gallery">
+  <h2>Explore Our Datasets</h2>
+  <div class="image-gallery">
+    <div class="image-item">
+      <img src="https://storage.googleapis.com/kaggle-media/competitions/kaggle/3362/media/woof_meow.jpg" alt="Dataset 1">
+      <p>Cat and Dog Dataset</p>
+    </div>
+    <div class="image-item">
+      <img src="https://www.birdscaribbean.org/wp-content/uploads/2023/08/Shorebirds-Monte-Cristi-2-Maria-Paulino-900x600.jpg" alt="Dataset 2">
+      <p>Nature Dataset</p>
+    </div>
+    <div class="image-item">
+      <img src="https://www.kia.com/content/dam/kwcms/gt/en/images/discover-kia/voice-search/parts-80-6.jpg" alt="Dataset 3">
+      <p>Car Dataset</p>
+    </div>
+  </div>
+
+  <!-- Browse Datasets Button -->
+  <div class="browse-datasets">
+    <a href="/browse/" class="cta-button">Browse All Datasets</a>
+  </div>
+</section>
+
+<style>
+  /* Browse Datasets Button Styles */
+  .browse-datasets {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .browse-datasets .cta-button {
+    background: var(--highlight);
+    color: var(--light);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .browse-datasets .cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(147, 18, 18, 0.586);
+  }
+</style>
 
   <!-- Call-to-Action Section -->
   <section class="cta-section">

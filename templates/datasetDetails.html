@@ -29,7 +29,7 @@
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #4f46e5;
+      color: #e63946; /* Red accent */
     }
 
     nav a {
@@ -40,7 +40,7 @@
     }
 
     nav a:hover {
-      color: #4f46e5;
+      color: #e63946; /* Red accent */
     }
 
     .container {
@@ -96,7 +96,7 @@
     .meta {
       margin-top: 20px;
       font-size: 0.9rem;
-      color: #444;
+      color:rgb(178, 32, 32);
     }
 
     .meta span {
@@ -119,25 +119,44 @@
       font-weight: 600;
       font-size: 0.95rem;
       text-align: center;
-      display: inline-block;
+      display: inline-block; x  
     }
 
     .btn-primary {
-      background-color: #4f46e5;
+      background-color: #bb253e; /* Updated red color */
       color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-block;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn-primary:hover {
-      background-color: #4338ca;
+      background-color: #991f33; /* Darker shade of red */
+      transform: translateY(-2px);
     }
 
     .btn-secondary {
-      background-color: #e5e7eb;
-      color: #374151;
+      background-color:rgb(28, 63, 120); /* Light blue */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 0.95rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn-secondary:hover {
-      background-color: #d1d5db;
+      background-color:rgb(9, 40, 107); /* Darker blue */
+      transform: translateY(-2px);
     }
 
     @media (max-width: 768px) {
@@ -173,7 +192,7 @@
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
-      color: #374151;
+      color: #e63946;
       font-size: 1rem;
     }
 
@@ -182,21 +201,21 @@
       width: 100%;
       padding: 12px;
       border-radius: 8px;
-      border: 1px solid #d1d5db;
+      border: 1px solidrgb(22, 38, 63);
       font-size: 1rem;
       background-color: #fff;
       color: #000;
     }
 
     .form-group textarea::placeholder {
-      color: #9ca3af;
+      color: #e63946;
     }
 
     .btn-primary {
       padding: 12px 24px;
       font-size: 1rem;
       border-radius: 8px;
-      background-color: #4f46e5;
+      background-color: #bb253e; /* Updated red color */
       color: #fff;
       border: none;
       cursor: pointer;
@@ -207,7 +226,7 @@
     }
 
     .btn-primary:hover {
-      background-color: #4338ca;
+      background-color: #991f33; /* Darker shade of red */
       transform: translateY(-2px);
     }
 
@@ -241,7 +260,7 @@
 
     .review-rating {
       font-weight: bold;
-      color: #4f46e5;
+      color: #e63946; /* Red accent */
       font-size: 1.1rem;
     }
 
@@ -261,6 +280,113 @@
       font-size: 1rem;
       text-align: center;
       margin-top: 20px;
+    }
+
+    /* Dark Mode Styles */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #1f2937;
+        color: #f3f4f6;
+      }
+
+      header {
+        background-color: #374151;
+        color: #f3f4f6;
+      }
+
+      .logo {
+        color: #e63946; /* Red accent */
+      }
+
+      nav a {
+        color: #d1d5db;
+      }
+
+      nav a:hover {
+        color: #e63946; /* Red accent */
+      }
+
+      .image-box {
+        background-color: #4b5563;
+      }
+
+      .content-box {
+        background-color: #374151;
+        color: #f3f4f6;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      .content-box h2,
+      .content-box h3 {
+        color: #e63946; /* Red accent */
+      }
+
+      .content-box p {
+        color: #d1d5db;
+      }
+
+      .meta span {
+        color: #e63946; /* Red accent */
+      }
+
+      .btn-primary {
+        background-color: #bb253e; /* Updated red color */
+        color: #f3f4f6;
+      }
+
+      .btn-primary:hover {
+        background-color: #991f33; /* Darker shade of red */
+      }
+
+      /* Dark Mode for Review Form */
+      .review-form {
+        background-color: #374151;
+        color: #f3f4f6;
+        border: 1px solid #6b7280;
+      }
+
+      .form-group select,
+      .form-group textarea {
+        background-color: #4b5563;
+        color: #f3f4f6;
+        border: 1px solid #6b7280;
+      }
+
+      .form-group textarea::placeholder {
+        color: #9ca3af;
+      }
+
+      .btn-primary {
+        background-color: #bb253e; /* Updated red color */
+        color: #f3f4f6;
+      }
+
+      .btn-primary:hover {
+        background-color: #991f33; /* Darker shade of red */
+      }
+
+      /* Dark Mode for Review Cards */
+      .review-card {
+        background-color: #4b5563;
+        color: #f3f4f6;
+        border: 1px solid #6b7280;
+      }
+
+      .review-rating {
+        color: #e63946; /* Red accent */
+      }
+
+      .review-text {
+        color: #d1d5db;
+      }
+
+      .review-date {
+        color: #9ca3af;
+      }
+
+      .no-reviews {
+        color: #9ca3af;
+      }
     }
   </style>
 </head>
@@ -294,7 +420,7 @@
 
         <div class="buttons">
           <a href="{{dataset.file.url}}" download class="btn btn-primary">Download</a>
-          <a href="#" class="btn btn-secondary">Share</a>
+          <a href="#" class="btn btn-secondary" id="share-button">Share</a>
         </div>
       </div>
     </div>
@@ -341,5 +467,24 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('share-button').addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Check if the Web Share API is supported
+      if (navigator.share) {
+        navigator.share({
+          title: '{{dataset.name}}',
+          text: 'Check out this dataset: {{dataset.name}}. Description: {{dataset.description}}',
+          url: window.location.href, // Current page URL
+        })
+        .then(() => console.log('Dataset shared successfully!'))
+        .catch((error) => console.error('Error sharing dataset:', error));
+      } else {
+        alert('Sharing is not supported on this browser.');
+      }
+    });
+  </script>
 </body>
 </html>
