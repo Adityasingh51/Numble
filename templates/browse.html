@@ -159,6 +159,12 @@
     }
 
     .file-info p {
+      display: -webkit-box;
+      -webkit-line-clamp: 10; /* Limit to 10 lines */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
       font-size: 0.85rem;
       color: #6b7280;
       margin-bottom: 0.5rem;
@@ -180,10 +186,55 @@
 
     /* Right Sidebar */
     .right-sidebar {
-      width: 250px;
-      background-color: #c7c7c7;
-      padding: 1rem;
-      border-left: 1px solid #e5e7eb;
+      width: 300px; /* Increased width for better readability */
+      background-color: #f3f4f6; /* Light gray background for better contrast */
+      padding: 1.5rem; /* Increased padding for spacing */
+      border-left: 1px solid #e5e7eb; /* Subtle border */
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+      overflow-y: auto; /* Enable scrolling if content overflows */
+    }
+
+    .right-sidebar h3 {
+      font-size: 1.5rem;
+      color: #111827; /* Darker text for the heading */
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e63946; /* Red accent underline */
+      padding-bottom: 0.5rem;
+    }
+
+    #sidebar-content p {
+      font-size: 0.95rem;
+      color: #374151; /* Neutral dark gray for text */
+      margin-bottom: 0.8rem;
+      line-height: 1.5; /* Improved readability */
+    }
+
+    .sidebar-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .sidebar-actions a {
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background-color: #3b82f6; /* Blue background */
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .sidebar-actions a:hover {
+      background-color: #2563eb; /* Darker blue on hover */
+      transform: translateY(-2px);
+    }
+
+    .sidebar-actions a:active {
+      background-color: #1d4ed8; /* Even darker blue when clicked */
+      transform: translateY(0);
     }
 
     /* Footer */
@@ -222,7 +273,7 @@
   <header class="navbar">
     <div class="logo">Numble</div>
     <form method="get" action="{% url 'browse' %}" style="flex: 1; display: flex; gap: 0.5rem;">
-      <input type="text" name="q" class="search-bar" placeholder="Search datasets..." value="{{ request.GET.q|default:'' }}" />
+      <input type="text" name="q" id="search-bar" class="search-bar" placeholder="Search datasets..." value="{{ request.GET.q|default:'' }}" />
       <button type="submit" class="upload-btn">Search</button>
     </form>
     <div class="nav-actions">
@@ -236,8 +287,7 @@
     <aside class="sidebar">
       <nav>
         <ul>
-          <li><a href="#">🔍 Search Filters</a></li>
-          <li><a href="#">🧠 AI-Tagged</a></li>
+          <li><a href="#">🔍 Search Dataset</a></li>
           <li><a href="#">📤 Uploads</a></li>
           <li><a href="#">⚙️ Settings</a></li>
         </ul>
@@ -251,22 +301,23 @@
       <!-- Filter & Sort Bar -->
       <div class="filter-bar">
         <div class="filters">Filter:
-          <button>Images</button>
-          <button>Videos</button>
+          <button class="filter-btn" data-filter="images">Images</button>
+          <button class="filter-btn" data-filter="videos">Videos</button>
+          <button class="filter-btn" data-filter="all">All</button>
         </div>
+        <!-- Sort Options -->
         <div class="sort-options">Sort by:
-          <select>
-            <option>Date Added</option>
-            <option>Name</option>
-            <option>Size</option>
+          <select id="sort-dropdown">
+            <option value="date">Date Added</option>
+            <option value="name">Name</option>
           </select>
         </div>
       </div>
 
       <!-- Grid/List View -->
-      <div class="dataset-grid">
+      <div class="dataset-grid" id="dataset-grid">
         {% for dataset in datasetList %}
-          <div class="file-card">
+          <div class="file-card" data-type="{{ dataset.type }}" data-date="{{ dataset.date_added }}" data-name="{{ dataset.name }}" data-size="{{ dataset.size }}">
             <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
             <div class="file-info">
               <h4>{{ dataset.name }}</h4>
@@ -284,15 +335,90 @@
       </div>
     </main>
 
-    <!-- Right Sidebar (Optional) -->
-    <aside class="right-sidebar">
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar" id="right-sidebar">
       <h3>Details</h3>
-      <p>Select a file to see metadata and actions.</p>
+      <div id="sidebar-content">
+        <p>Select a file to see metadata and actions.</p>
+      </div>
     </aside>
   </div>
 
   <footer class="footer">
     <p>© 2025 Numble. All rights reserved.</p>
   </footer>
+
+  <script>
+    document.getElementById('sort-dropdown').addEventListener('change', function () {
+      const sortBy = this.value; // Get the selected sort option
+      const grid = document.getElementById('dataset-grid');
+      const cards = Array.from(grid.querySelectorAll('.file-card')); // Get all dataset cards
+
+      // Sort the cards based on the selected option
+      cards.sort((a, b) => {
+        if (sortBy === 'date') {
+          return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
+        } else if (sortBy === 'name') {
+          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+        }
+      });
+
+      // Reorder the cards in the grid
+      cards.forEach(card => grid.appendChild(card));
+    });
+
+    // Add event listeners to all dataset cards
+    document.querySelectorAll('.file-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Get dataset metadata from the card's attributes
+        const name = card.getAttribute('data-name');
+        const date = card.getAttribute('data-date');
+        const size = card.getAttribute('data-size');
+        const description = card.querySelector('.file-info p').textContent;
+        const previewUrl = card.querySelector('.btn-preview').getAttribute('href'); // Get the preview URL
+        const downloadUrl = card.querySelector('img').getAttribute('src'); // Use the image URL for download
+
+        // Populate the right sidebar with metadata
+        const sidebarContent = document.getElementById('sidebar-content');
+        sidebarContent.innerHTML = `
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Date Added:</strong> ${new Date(date).toLocaleDateString()}</p>
+          <p><strong>Size:</strong> ${size} MB</p>
+          <p><strong>Description:</strong> ${description}</p>
+          <div class="sidebar-actions">
+            <a href="${previewUrl}" class="btn-preview" target="_blank">Preview</a>
+            <a href="${downloadUrl}" class="btn-download" download>Download</a>
+          </div>
+        `;
+      });
+    });
+
+    // Add event listeners to all filter buttons
+    document.querySelectorAll('.filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter'); // Get the filter type
+        const cards = document.querySelectorAll('.file-card'); // Get all dataset cards
+
+        cards.forEach(card => {
+          const type = card.getAttribute('data-type'); // Get the type of the card
+          if (filter === 'all' || type === filter) {
+            card.style.display = 'block'; // Show matching cards
+          } else {
+            card.style.display = 'none'; // Hide non-matching cards
+          }
+          
+        });
+      });
+    });
+
+    // Add event listener to the "Search Dataset" button
+    document.querySelector('.sidebar a[href="#"]').addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default link behavior
+      const searchBar = document.getElementById('search-bar');
+      if (searchBar) {
+        searchBar.focus(); // Focus on the search bar
+      }
+    });
+  </script>
 </body>
 </html>
