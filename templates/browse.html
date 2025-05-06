@@ -150,6 +150,12 @@
       object-fit: cover;
     }
 
+    .file-card video {
+      width: 100%;
+      height: 200px; /* Adjusted height for a better aspect ratio */
+      object-fit: cover;
+    }
+
     .file-info {
       padding: 1rem;
     }
@@ -273,12 +279,11 @@
   <header class="navbar">
     <div class="logo">Numble</div>
     <form method="get" action="{% url 'browse' %}" style="flex: 1; display: flex; gap: 0.5rem;">
-      <input type="text" name="q" id="search-bar" class="search-bar" placeholder="Search datasets..." value="{{ request.GET.q|default:'' }}" />
+      <input type="text" name="q" id="search-bar" class="search-bar" placeholder="🔍 Search Datasets..." value="{{ request.GET.q|default:'' }}" />
       <button type="submit" class="upload-btn">Search</button>
     </form>
     <div class="nav-actions">
       <button class="upload-btn">Upload</button>
-      <div class="profile-icon">👤</div>
     </div>
   </header>
 
@@ -287,9 +292,9 @@
     <aside class="sidebar">
       <nav>
         <ul>
-          <li><a href="#">🔍 Search Dataset</a></li>
-          <li><a href="#">📤 Uploads</a></li>
-          <li><a href="#">⚙️ Settings</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li> <!-- Link to the home page -->
+          <li><a href="{% url 'register' %}">Join Numble</a></li> <!-- Link to the registration page -->
+          <li><a href="{% url 'login' %}">Sign In</a></li> <!-- Link to the login page -->
         </ul>
       </nav>
     </aside>
@@ -298,27 +303,20 @@
     <main class="main-content">
       <div class="breadcrumbs">Home > Browse > All Datasets</div>
 
-      <!-- Filter & Sort Bar -->
-      <div class="filter-bar">
-        <div class="filters">Filter:
-          <button class="filter-btn" data-filter="images">Images</button>
-          <button class="filter-btn" data-filter="videos">Videos</button>
-          <button class="filter-btn" data-filter="all">All</button>
-        </div>
-        <!-- Sort Options -->
-        <div class="sort-options">Sort by:
-          <select id="sort-dropdown">
-            <option value="date">Date Added</option>
-            <option value="name">Name</option>
-          </select>
-        </div>
-      </div>
+    
 
       <!-- Grid/List View -->
       <div class="dataset-grid" id="dataset-grid">
         {% for dataset in datasetList %}
           <div class="file-card" data-type="{{ dataset.type }}" data-date="{{ dataset.date_added }}" data-name="{{ dataset.name }}" data-size="{{ dataset.size }}">
-            <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
+            {% if dataset.category == "image" %}
+              <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
+            {% elif dataset.category == "video" %}
+              <video controls muted>
+                <source src="{{ dataset.file.url }}" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            {% endif %}
             <div class="file-info">
               <h4>{{ dataset.name }}</h4>
               <p>Tags: {{ dataset.description }}</p>
@@ -353,16 +351,7 @@
       const sortBy = this.value; // Get the selected sort option
       const grid = document.getElementById('dataset-grid');
       const cards = Array.from(grid.querySelectorAll('.file-card')); // Get all dataset cards
-
-      // Sort the cards based on the selected option
-      cards.sort((a, b) => {
-        if (sortBy === 'date') {
-          return new Date(a.getAttribute('data-date')) - new Date(b.getAttribute('data-date'));
-        } else if (sortBy === 'name') {
-          return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
-        }
-      });
-
+    
       // Reorder the cards in the grid
       cards.forEach(card => grid.appendChild(card));
     });
@@ -376,14 +365,12 @@
         const size = card.getAttribute('data-size');
         const description = card.querySelector('.file-info p').textContent;
         const previewUrl = card.querySelector('.btn-preview').getAttribute('href'); // Get the preview URL
-        const downloadUrl = card.querySelector('img').getAttribute('src'); // Use the image URL for download
+        const downloadUrl = card.querySelector('img') ? card.querySelector('img').getAttribute('src') : card.querySelector('video source').getAttribute('src'); // Use the image or video URL for download
 
         // Populate the right sidebar with metadata
         const sidebarContent = document.getElementById('sidebar-content');
         sidebarContent.innerHTML = `
           <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Date Added:</strong> ${new Date(date).toLocaleDateString()}</p>
-          <p><strong>Size:</strong> ${size} MB</p>
           <p><strong>Description:</strong> ${description}</p>
           <div class="sidebar-actions">
             <a href="${previewUrl}" class="btn-preview" target="_blank">Preview</a>
@@ -391,33 +378,6 @@
           </div>
         `;
       });
-    });
-
-    // Add event listeners to all filter buttons
-    document.querySelectorAll('.filter-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const filter = button.getAttribute('data-filter'); // Get the filter type
-        const cards = document.querySelectorAll('.file-card'); // Get all dataset cards
-
-        cards.forEach(card => {
-          const type = card.getAttribute('data-type'); // Get the type of the card
-          if (filter === 'all' || type === filter) {
-            card.style.display = 'block'; // Show matching cards
-          } else {
-            card.style.display = 'none'; // Hide non-matching cards
-          }
-          
-        });
-      });
-    });
-
-    // Add event listener to the "Search Dataset" button
-    document.querySelector('.sidebar a[href="#"]').addEventListener('click', function (e) {
-      e.preventDefault(); // Prevent default link behavior
-      const searchBar = document.getElementById('search-bar');
-      if (searchBar) {
-        searchBar.focus(); // Focus on the search bar
-      }
     });
   </script>
 </body>
