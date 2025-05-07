@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Browse - Numble</title>
   <style>
+    /* General Styles */
     * {
       margin: 0;
       padding: 0;
@@ -23,19 +24,19 @@
       justify-content: space-between;
       align-items: center;
       background-color: #111827;
-      color: rgb(255, 255, 255);
+      color: #fff;
       padding: 1rem 2rem;
     }
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-          }
+    }
 
     .search-bar {
       flex: 1;
       max-width: 400px;
-      margin: 0 5rem; /* Center the search bar */
+      margin: 0 5rem;
       padding: 0.5rem;
       border-radius: 6px;
       border: none;
@@ -45,26 +46,21 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-          }
+    }
 
     .upload-btn {
       background-color: #08419d;
       color: white;
-      margin-left: -5rem;
       padding: 0.5rem 1rem;
       border: none;
       border-radius: 6px;
       cursor: pointer;
     }
 
-    .profile-icon {
-      font-size: 1.2rem;
-    }
-
     /* Layout */
     .layout {
       display: flex;
-      height: calc(100vh - 70px); /* Adjust for navbar height */
+      height: calc(100vh - 70px);
     }
 
     /* Sidebar */
@@ -92,7 +88,7 @@
       color: #4d589cb3;
     }
 
-    /* Main content */
+    /* Main Content */
     .main-content {
       flex: 1;
       padding: 1.5rem;
@@ -105,35 +101,15 @@
       color: #6b7280;
     }
 
-    .filter-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .filters button {
-      margin-right: 0.5rem;
-      padding: 0.4rem 0.8rem;
-      background-color: #aeaeae6e;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .sort-options select {
-      padding: 0.4rem;
-    }
-
-    /* Dataset grid */
+    /* Dataset Grid */
     .dataset-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Wider rectangles */
-      gap: 1rem; /* Reduced gap for a tighter layout */
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1rem;
     }
 
     .file-card {
-      background-color: rgb(255, 255, 255);
+      background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
       overflow: hidden;
@@ -144,15 +120,9 @@
       transform: translateY(-5px);
     }
 
-    .file-card img {
+    .file-card img, .file-card video {
       width: 100%;
-      height: 200px; /* Adjusted height for a better aspect ratio */
-      object-fit: cover;
-    }
-
-    .file-card video {
-      width: 100%;
-      height: 200px; /* Adjusted height for a better aspect ratio */
+      height: 200px;
       object-fit: cover;
     }
 
@@ -165,54 +135,34 @@
     }
 
     .file-info p {
-      display: -webkit-box;
-      -webkit-line-clamp: 10; /* Limit to 10 lines */
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: normal;
       font-size: 0.85rem;
       color: #6b7280;
       margin-bottom: 0.5rem;
     }
 
-    .file-actions button {
-      margin-right: 0.5rem;
-      padding: 0.4rem 0.6rem;
-      font-size: 0.85rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: #e5e7eb;
-    }
-
-    .file-actions button:hover {
-      background-color: #d1d5db;
-    }
-
     /* Right Sidebar */
     .right-sidebar {
-      width: 300px; /* Increased width for better readability */
-      background-color: #f3f4f6; /* Light gray background for better contrast */
-      padding: 1.5rem; /* Increased padding for spacing */
-      border-left: 1px solid #e5e7eb; /* Subtle border */
-      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
-      overflow-y: auto; /* Enable scrolling if content overflows */
+      width: 300px;
+      background-color: #f3f4f6;
+      padding: 1.5rem;
+      border-left: 1px solid #e5e7eb;
+      box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
     }
 
     .right-sidebar h3 {
       font-size: 1.5rem;
-      color: #111827; /* Darker text for the heading */
+      color: #111827;
       margin-bottom: 1rem;
-      border-bottom: 2px solid #e63946; /* Red accent underline */
+      border-bottom: 2px solid #e63946;
       padding-bottom: 0.5rem;
     }
 
     #sidebar-content p {
       font-size: 0.95rem;
-      color: #374151; /* Neutral dark gray for text */
+      color: #374151;
       margin-bottom: 0.8rem;
-      line-height: 1.5; /* Improved readability */
+      line-height: 1.5;
     }
 
     .sidebar-actions {
@@ -224,7 +174,7 @@
     .sidebar-actions a {
       display: inline-block;
       padding: 0.6rem 1rem;
-      background-color: #3b82f6; /* Blue background */
+      background-color: #3b82f6;
       color: white;
       border-radius: 6px;
       text-decoration: none;
@@ -234,12 +184,12 @@
     }
 
     .sidebar-actions a:hover {
-      background-color: #2563eb; /* Darker blue on hover */
+      background-color: #2563eb;
       transform: translateY(-2px);
     }
 
     .sidebar-actions a:active {
-      background-color: #1d4ed8; /* Even darker blue when clicked */
+      background-color: #1d4ed8;
       transform: translateY(0);
     }
 
@@ -249,28 +199,6 @@
       color: white;
       text-align: center;
       padding: 1rem;
-    }
-
-    .btn-preview {
-      display: inline-block;
-      background-color: #3b82f6; /* Blue background */
-      color: white; /* White text */
-      padding: 0.5rem 1rem; /* Padding for size */
-      border-radius: 5px; /* Rounded corners */
-      text-decoration: none; /* Remove underline */
-      font-size: 0.9rem; /* Font size */
-      font-weight: 500; /* Slightly bold text */
-      transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
-    }
-
-    .btn-preview:hover {
-      background-color: #2563eb; /* Darker blue on hover */
-      transform: translateY(-2px); /* Slight lift on hover */
-    }
-
-    .btn-preview:active {
-      background-color: #1d4ed8; /* Even darker blue when clicked */
-      transform: translateY(0); /* Reset lift on click */
     }
   </style>
 </head>
@@ -292,9 +220,9 @@
     <aside class="sidebar">
       <nav>
         <ul>
-          <li><a href="{% url 'home' %}">Home</a></li> <!-- Link to the home page -->
-          <li><a href="{% url 'register' %}">Join Numble</a></li> <!-- Link to the registration page -->
-          <li><a href="{% url 'login' %}">Sign In</a></li> <!-- Link to the login page -->
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'register' %}">Join Numble</a></li>
+          <li><a href="{% url 'login' %}">Sign In</a></li>
         </ul>
       </nav>
     </aside>
@@ -303,9 +231,7 @@
     <main class="main-content">
       <div class="breadcrumbs">Home > Browse > All Datasets</div>
 
-    
-
-      <!-- Grid/List View -->
+      <!-- Dataset Grid -->
       <div class="dataset-grid" id="dataset-grid">
         {% for dataset in datasetList %}
           <div class="file-card" data-type="{{ dataset.type }}" data-date="{{ dataset.date_added }}" data-name="{{ dataset.name }}" data-size="{{ dataset.size }}">
@@ -347,36 +273,37 @@
   </footer>
 
   <script>
-    document.getElementById('sort-dropdown').addEventListener('change', function () {
-      const sortBy = this.value; // Get the selected sort option
-      const grid = document.getElementById('dataset-grid');
-      const cards = Array.from(grid.querySelectorAll('.file-card')); // Get all dataset cards
-    
-      // Reorder the cards in the grid
-      cards.forEach(card => grid.appendChild(card));
-    });
-
     // Add event listeners to all dataset cards
     document.querySelectorAll('.file-card').forEach(card => {
       card.addEventListener('click', () => {
-        // Get dataset metadata from the card's attributes
         const name = card.getAttribute('data-name');
         const date = card.getAttribute('data-date');
         const size = card.getAttribute('data-size');
-        const description = card.querySelector('.file-info p').textContent;
-        const previewUrl = card.querySelector('.btn-preview').getAttribute('href'); // Get the preview URL
-        const downloadUrl = card.querySelector('img') ? card.querySelector('img').getAttribute('src') : card.querySelector('video source').getAttribute('src'); // Use the image or video URL for download
+        const descriptionElement = card.querySelector('.file-info p');
+        const description = descriptionElement ? descriptionElement.textContent.trim() : 'No description available';
+        const previewUrlElement = card.querySelector('.btn-preview');
+        const previewUrl = previewUrlElement ? previewUrlElement.getAttribute('href') : '#';
+        const downloadUrl = card.querySelector('img')
+          ? card.querySelector('img').getAttribute('src')
+          : card.querySelector('video source')
+          ? card.querySelector('video source').getAttribute('src')
+          : '#';
 
-        // Populate the right sidebar with metadata
         const sidebarContent = document.getElementById('sidebar-content');
-        sidebarContent.innerHTML = `
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Description:</strong> ${description}</p>
-          <div class="sidebar-actions">
-            <a href="${previewUrl}" class="btn-preview" target="_blank">Preview</a>
-            <a href="${downloadUrl}" class="btn-download" download>Download</a>
-          </div>
-        `;
+        if (sidebarContent) {
+          sidebarContent.innerHTML = `
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Date Added:</strong> ${date}</p>
+            <p><strong>Size:</strong> ${size} MB</p>
+            <p><strong>Description:</strong> ${description}</p>
+            <div class="sidebar-actions">
+              <a href="${previewUrl}" class="btn-preview" target="_blank">Preview</a>
+              <a href="${downloadUrl}" class="btn-download" download>Download</a>
+            </div>
+          `;
+        } else {
+          console.error('Sidebar content element not found.');
+        }
       });
     });
   </script>
