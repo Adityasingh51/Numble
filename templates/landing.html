@@ -1,372 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Numble - Datasets for AI & ML</title>
-  <style>
-    :root {
-      --primary: #1a1a2e;
-      --secondary: #16213e;
-      --accent: #0f3460;
-      --highlight: #bb253e;
-      --light: #f5f5f5;
-      --dark: #0d0d0d;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: var(--light);
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    header {
-      background: var(--accent);
-      color: var(--light);
-      padding: 100px 20px 60px;
-      text-align: center;
-      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 30px;
-    }
-
-    .cta-button {
-      background: var(--highlight);
-      color: var(--light);
-      padding: 14px 30px;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: inline-block;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(147, 18, 18, 0.586);
-    }
-
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    section h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--highlight);
-    }
-
-    section p {
-      max-width: 750px;
-      margin: 0 auto 40px;
-      color: #ddd;
-      font-size: 1.1rem;
-    }
-
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 20px;
-    }
-
-    .feature {
-      background: var(--secondary);
-      padding: 30px;
-      border-radius: 16px;
-      width: 280px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .feature h3 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: var(--highlight);
-    }
-
-    .feature p {
-      font-size: 1rem;
-      color: #bbb;
-    }
-
-    .cta-section {
-      background: var(--highlight);
-      color: var(--light);
-      padding: 60px 20px;
-      clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 85%);
-    }
-
-    .cta-section h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    footer {
-      background: var(--dark);
-      color: var(--light);
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--highlight);
-    }
-
-    .navbar {
-      background-color: var(--primary);
-      color: var(--light);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .navbar .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links li {
-      display: inline;
-    }
-
-    .nav-links a {
-      color: var(--light);
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--highlight);
-    }
-
-    .cta-button {
-      background-color: var(--highlight);
-      color: var(--light);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .cta-button:hover {
-      background-color: #880815;
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-      section h2 {
-        font-size: 1.8rem;
-      }
-
-      .feature {
-        width: 90%;
-      }
-
-      .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-      }
-    }
-
-    /* Gallery Section Styles */
-    #gallery {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    #gallery h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--highlight);
-    }
-
-    .image-gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .image-item {
-      background: var(--secondary);
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 300px;
-      text-align: center;
-    }
-
-    .image-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
-
-    .image-item p {
-      color: #ddd;
-      font-size: 1rem;
-    }
-
-    .image-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-    }
-
-    @media (max-width: 768px) {
-      .image-item {
-        width: 90%;
-      }
-    }
-  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100 font-sans">
   <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="logo">Numble</div>
-      <ul class="nav-links">
-        <li><a href="/browse/">Browse</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="/login/" class="cta-button">Sign In</a></li>
+  <nav class="bg-gray-800 shadow-lg">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="text-2xl font-bold text-white">Numble</div>
+      <ul class="flex space-x-6">
+        <li><a href="/browse/" class="text-gray-300 hover:text-white transition">Browse</a></li>
+        <li><a href="#about" class="text-gray-300 hover:text-white transition">About</a></li>
+        <li><a href="/login/" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">Sign In</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <header>
-    <h1>Welcome to Numble</h1>
-    <p>Your trusted source for high-quality image and video datasets to fuel your AI and machine learning models.</p>
-    <a href="/browse/" class="cta-button">Browse Datasets</a>
+  <header class="bg-gradient-to-r from-blue-900 to-blue-600 text-center py-20">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Welcome to Numble</h1>
+    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-6">
+      Your trusted source for high-quality image and video datasets to fuel your AI and machine learning models.
+    </p>
+    <a href="/browse/" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition">
+      Browse Datasets
+    </a>
   </header>
 
   <!-- About Section -->
-  <section id="about">
-    <h2>Why Numble?</h2>
-    <p>Numble offers curated datasets, ready for real-world AI training and testing. With advanced search, easy access, and collaboration tools, Numble helps developers, researchers, and educators streamline their machine learning workflows.</p>
+  <section id="about" class="py-16 bg-gray-800 text-center">
+    <h2 class="text-3xl font-bold text-blue-400 mb-6">Why Numble?</h2>
+    <p class="text-gray-300 max-w-3xl mx-auto mb-8">
+      Numble offers curated datasets, ready for real-world AI training and testing. With advanced search, easy access, and collaboration tools, Numble helps developers, researchers, and educators streamline their machine learning workflows.
+    </p>
   </section>
 
   <!-- Features Section -->
-  <section>
-    <h2>What We Offer</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>Diverse Datasets</h3>
-        <p>Access labeled datasets across categories like facial recognition, object detection, medical imaging, and more.</p>
+  <section class="py-16 bg-gray-900 text-center">
+    <h2 class="text-3xl font-bold text-blue-400 mb-6">What We Offer</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-blue-400 mb-4">Diverse Datasets</h3>
+        <p class="text-gray-300">
+          Access labeled datasets across categories like facial recognition, object detection, medical imaging, and more.
+        </p>
       </div>
-      <div class="feature">
-        <h3>Collaborative Tools</h3>
-        <p>Work with teams, track changes, and improve dataset quality with shared editing tools.</p>
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-blue-400 mb-4">Collaborative Tools</h3>
+        <p class="text-gray-300">
+          Work with teams, track changes, and improve dataset quality with shared editing tools.
+        </p>
       </div>
-      <div class="feature">
-        <h3>Open Access</h3>
-        <p>Download and use datasets for free or with transparent licenses for academic and commercial use.</p>
+      <div class="bg-gray-800 p-6 rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-blue-400 mb-4">Open Access</h3>
+        <p class="text-gray-300">
+          Download and use datasets for free or with transparent licenses for academic and commercial use.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Image Gallery Section -->
-<section id="gallery">
-  <h2>Explore Our Datasets</h2>
-  <div class="image-gallery">
-    <div class="image-item">
-      <img src="https://storage.googleapis.com/kaggle-media/competitions/kaggle/3362/media/woof_meow.jpg" alt="Dataset 1">
-      <p>Cat and Dog Dataset</p>
+  <section id="gallery" class="py-16 bg-gray-800 text-center">
+    <h2 class="text-3xl font-bold text-blue-400 mb-6">Explore Our Datasets</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="bg-gray-900 p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="https://storage.googleapis.com/kaggle-media/competitions/kaggle/3362/media/woof_meow.jpg" alt="Dataset 1" class="rounded-lg mb-4">
+        <p class="text-gray-300">Cat and Dog Dataset</p>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="https://www.birdscaribbean.org/wp-content/uploads/2023/08/Shorebirds-Monte-Cristi-2-Maria-Paulino-900x600.jpg" alt="Dataset 2" class="rounded-lg mb-4">
+        <p class="text-gray-300">Nature Dataset</p>
+      </div>
+      <div class="bg-gray-900 p-4 rounded-lg shadow hover:shadow-lg transition">
+        <img src="https://www.kia.com/content/dam/kwcms/gt/en/images/discover-kia/voice-search/parts-80-6.jpg" alt="Dataset 3" class="rounded-lg mb-4">
+        <p class="text-gray-300">Car Dataset</p>
+      </div>
     </div>
-    <div class="image-item">
-      <img src="https://www.birdscaribbean.org/wp-content/uploads/2023/08/Shorebirds-Monte-Cristi-2-Maria-Paulino-900x600.jpg" alt="Dataset 2">
-      <p>Nature Dataset</p>
+    <div class="mt-8">
+      <a href="/browse/" class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-600 transition">
+        Browse All Datasets
+      </a>
     </div>
-    <div class="image-item">
-      <img src="https://www.kia.com/content/dam/kwcms/gt/en/images/discover-kia/voice-search/parts-80-6.jpg" alt="Dataset 3">
-      <p>Car Dataset</p>
-    </div>
-  </div>
-
-  <!-- Browse Datasets Button -->
-  <div class="browse-datasets">
-    <a href="/browse/" class="cta-button">Browse All Datasets</a>
-  </div>
-</section>
-
-<style>
-  /* Browse Datasets Button Styles */
-  .browse-datasets {
-    margin-top: 30px;
-    text-align: center;
-  }
-
-  .browse-datasets .cta-button {
-    background: var(--highlight);
-    color: var(--light);
-    padding: 14px 30px;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: inline-block;
-    text-decoration: none;
-  }
-
-  .browse-datasets .cta-button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(147, 18, 18, 0.586);
-  }
-</style>
+  </section>
 
   <!-- Call-to-Action Section -->
-  <section class="cta-section">
-    <h2>Start Building Smarter Models Today</h2>
-    <a href="/register/" class="cta-button">Join Numble</a>
+  <section class="bg-blue-600 text-center py-16">
+    <h2 class="text-3xl font-bold text-white mb-6">Start Building Smarter Models Today</h2>
+    <a href="/register/" class="bg-white text-blue-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 transition">
+      Join Numble
+    </a>
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="bg-gray-800 text-gray-300 text-center py-4">
     <p>&copy; 2025 Numble. All rights reserved.</p>
   </footer>
 </body>
