@@ -138,6 +138,13 @@
       font-size: 0.85rem;
       color: #6b7280;
       margin-bottom: 0.5rem;
+      line-height: 1.5; /* Ensure consistent line height */
+      max-height: calc(1.5em * 9); /* Limit to 9 lines (1.5em per line) */
+      overflow: hidden; /* Hide overflowing text */
+      text-overflow: ellipsis; /* Add ellipsis for overflow */
+      display: -webkit-box;
+      -webkit-line-clamp: 9; /* Limit to 9 lines */
+      -webkit-box-orient: vertical;
     }
 
     /* Right Sidebar */
@@ -200,6 +207,28 @@
       text-align: center;
       padding: 1rem;
     }
+
+    .file-actions .btn-preview {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #3b82f6; /* Blue background */
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .file-actions .btn-preview:hover {
+      background-color: #2563eb; /* Darker blue on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    .file-actions .btn-preview:active {
+      background-color: #1d4ed8; /* Even darker blue on click */
+      transform: translateY(0); /* Reset lift effect */
+    }
   </style>
 </head>
 <body>
@@ -247,9 +276,7 @@
               <h4>{{ dataset.name }}</h4>
               <p>Tags: {{ dataset.description }}</p>
               <div class="file-actions">
-                <div class="buttons">
-                  <a href="{% url 'datasetDetails' dataset.id %}" class="btn-preview">Preview</a>
-                </div>
+                <a href="{% url 'datasetDetails' dataset.id %}" class="btn-preview">Preview</a>
               </div>
             </div>
           </div>
@@ -293,8 +320,6 @@
         if (sidebarContent) {
           sidebarContent.innerHTML = `
             <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Date Added:</strong> ${date}</p>
-            <p><strong>Size:</strong> ${size} MB</p>
             <p><strong>Description:</strong> ${description}</p>
             <div class="sidebar-actions">
               <a href="${previewUrl}" class="btn-preview" target="_blank">Preview</a>
