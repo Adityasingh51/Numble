@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Datasetmanager, Review  # Import the Review model
 from django.contrib import messages  # For user feedback
+from django.contrib.auth.decorators import login_required
 
 # For Search Functionality
 def browse(request):
@@ -39,3 +40,7 @@ def submit_review(request, dataset_id):
     else:
         # If the request is not POST, redirect to the dataset details page
         return redirect("datasetDetails", dataset_id=dataset_id)
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html', {'user': request.user})

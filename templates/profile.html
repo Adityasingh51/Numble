@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-4xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+    <!-- Profile Header -->
+    <div class="bg-blue-500 text-white text-center py-8">
+      <img class="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md" src="https://www.pngmart.com/files/21/Admin-Profile-Vector-PNG-Clipart.png" alt="Profile Picture">
+      <h1 class="text-2xl font-bold mt-4">Welcome, {{ user.username }}</h1>
+      <p class="text-sm mt-2">Manage your account and settings</p>
+    </div>
+
+    <!-- User Info -->
+    <div class="p-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">User Information</h2>
+      <div class="text-gray-600 space-y-2">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Joined:</strong> {{ user.date_joined|date:"F j, Y" }}</p>
+      </div>
+    </div>
+
+    <!-- Profile Actions -->
+    <div class="p-6 border-t border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Actions</h2>
+      <div class="flex space-x-4">
+        <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">Edit Profile</a>
+        <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">Change Password</a>
+        <a href="#" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition">Logout</a>
+      </div>
+    </div>
+
+    <!-- Downloaded Datasets -->
+    <div class="p-6 border-t border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Your Downloaded Datasets</h2>
+      <ul class="space-y-4">
+        {% for dataset in downloaded_datasets %}
+          <li class="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+            <span class="text-gray-700 font-medium">Dataset: <strong>{{ dataset.name }}</strong></span>
+            <a href="{% url 'datasetDetails' dataset.id %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">View Details</a>
+          </li>
+        {% empty %}
+          <p class="text-gray-500">You have not downloaded any datasets yet.</p>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Account Settings -->
+    <div class="p-6 border-t border-gray-200">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Account Settings</h2>
+      <ul class="space-y-4">
+        <li class="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+          <span class="text-gray-700 font-medium">Update Email</span>
+          <a href="#" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">Update</a>
+        </li>
+        <li class="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+          <span class="text-gray-700 font-medium">Delete Account</span>
+          <a href="#" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition">Delete</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
