@@ -289,7 +289,7 @@
             {% if dataset.category == "image" %}
               <img src="{{ dataset.file.url }}" alt="{{ dataset.name }}" />
             {% elif dataset.category == "video" %}
-              <video controls muted>
+              <video autoplay muted loop class="w-full h-48 object-cover">
                 <source src="{{ dataset.file.url }}" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
